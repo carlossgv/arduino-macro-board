@@ -18,8 +18,16 @@ parser.on('data', async (data) => {
   try {
     const parsedData = JSON.parse(data);
     const { percentage, activeButton } = parsedData;
+    console.log(parsedData);
 
     if (activeButton === 2) {
+      exec('wmctrl -a Google Chrome', (err, stdout, stderr) => {
+        if (err) {
+          execFile('sensible-browser');
+          return;
+        }
+      });
+    } else if (activeButton === 3) {
       exec('wmctrl -a Spotify', (err, stdout, stderr) => {
         if (err) {
           execFile('spotify');
